@@ -9,8 +9,16 @@ class Technology extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'slug',
+        'name',
+    ];
+
     public static function generateSlug($name){
         return Str::slug($name, '-');
     }
-
+    
+    public function projects(){
+        return $this->belongsToMany(Project::class, 'project_technology');
+    }
 }

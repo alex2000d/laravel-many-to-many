@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -31,7 +32,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -59,6 +61,13 @@ class ProjectController extends Controller
         
 
         $project->save();
+
+        if ($request->has('technologies')) {
+
+            $technologies = $request->input('technologies');
+            $project->technologies()->sync($technologies);
+        }
+        
 
         return redirect()->route('admin.projects.index');
     }

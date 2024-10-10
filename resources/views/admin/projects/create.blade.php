@@ -45,6 +45,17 @@
                         @enderror
                     </div>
                     <div class="col-6">
+                        <label for="" class="ccontrol-label">Seleziona Tecnologie</label>
+                        <div>
+                            @foreach ($technologies as $technology)
+                               <div class="form-check-inline">
+                                  <input type="checkbox" name="technologies[]" class="form-check-input" value="{{$technology->id}}">
+                                  <label for="" class="form-check-label">{{$technology->name}}</label>
+                               </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-6">
                         <label for="" class="ccontrol-label">nome</label>
                         <input type="text" class="form-control" name="name" placeholder="nome" value="{{old('name')}}">
                         @error ('name')
