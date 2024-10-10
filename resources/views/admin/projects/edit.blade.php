@@ -32,14 +32,14 @@
                         @else 
                         <img class="img" src="{{asset('./storage/'.$project->image)}}" alt="{{$project->title}}">
                         @endif
-                        <label class="mt-3" for="" class="control-label">immagine</label>
+                        <label class="" for="" class="control-label">immagine</label>
                         <input type="file" class="form-control" name="image" placeholder="immagine" value="{{old('image', $project->image)}}">
                         @error ('image')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
                     <div class="col-6">
-                        <label for="" class="ccontrol-label">seleziona tipologia</label>
+                        <label for="" class="control-label mt-5">seleziona tipologia</label>
                         <select type="file" class="form-control" name="type_id">
                             <option value="">seleziona tipologia</option>
                             @foreach ($types as $type)
@@ -49,6 +49,22 @@
                         @error ('type_id')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="control-label mt-5">Seleziona Tecnologie</label>
+                        <div>
+                            @foreach ($technologies as $technology)
+                            <div class="form-check-inline">
+                                   @if ($errors->any())
+                                   <input type="checkbox" name="technologies[]" class="form-check-input" value="{{$technology->id}}" {{ in_array($technology->id, old('technologies')) ? 'checked' : '' }}>
+                                   @else    
+                                   <input type="checkbox" name="technologies[]" class="form-check-input" value="{{$technology->id}}" {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                                   @endif
+
+                                  <label for="" class="form-check-label">{{$technology->name}}</label>
+                               </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="col-6">
                         <label for="" class="ccontrol-label">nome</label>

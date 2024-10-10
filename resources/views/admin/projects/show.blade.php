@@ -16,6 +16,13 @@
           <div class="col-6">
             <p>{{$project->description}}</p>
             <p>{{ optional($project->type)->name ?? 'Nessuna tipologia assegnata' }}</p>
+            <p>
+              @forelse ($project->technologies as $technology)
+                  {{$technology->name}}
+              @empty
+                  il progetto non ha nessuna tecnologia assegnata
+              @endforelse
+            </p>
           </div>
         </div>
     </div>
