@@ -141,6 +141,8 @@ class ProjectController extends Controller
         if(Str::startsWith($project->image, 'https') === false){
             Storage::disk('public')->delete($project->image);
         }
+
+        $project->technologies()->sync([]);
         
         $project->delete();
         
